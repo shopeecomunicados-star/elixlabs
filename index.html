@@ -134,11 +134,12 @@ body {
 }
 
 .avaliacao {
-    min-width: 100%;
     flex: 0 0 100%;
+    max-width: 100%;
     display: flex;
     justify-content: center;
 }
+
 
 
 
@@ -440,10 +441,10 @@ const slidesAvaliacao = document.querySelectorAll(".avaliacao");
 let indexAvaliacao = 0;
 
 function atualizarAvaliacao() {
-    const largura = document.querySelector(".avaliacoes-container").offsetWidth;
     avaliacoes.style.transition = "transform 0.4s ease";
-    avaliacoes.style.transform = `translateX(-${indexAvaliacao * largura}px)`;
+    avaliacoes.style.transform = `translateX(-${indexAvaliacao * 100}%)`;
 }
+
 
 
 function proximaAvaliacao() {
