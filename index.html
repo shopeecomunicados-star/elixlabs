@@ -87,6 +87,39 @@ body {
 .bolinha.ativa {
     background: yellow;
 }
+
+/* ===== BOTÃO COMPRAR ===== */
+.botao-comprar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 25px 0 40px 0;
+}
+
+.botao-comprar {
+    width: 95%;
+    max-width: 600px;
+    background: #FFD700;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 18px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: 0.2s ease;
+}
+
+.botao-comprar:active {
+    transform: scale(0.97);
+}
+
+
 </style>
 </head>
 
@@ -124,6 +157,26 @@ body {
     <img src="estrelasava.jpg" alt="Avaliações 5 Estrelas" class="imagem-topo" draggable="false">
     <div class="bloqueio"></div>
 </section>
+
+    <!-- ===== BOTÃO COMPRAR AGORA ===== -->
+<div class="botao-comprar-container">
+    <a href="https://seulink.com" class="botao-comprar">
+
+        <!-- Ícone Carrinho Branco -->
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             width="24" 
+             height="24" 
+             fill="white" 
+             viewBox="0 0 24 24">
+            <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44C7.52 17.37 8.48 19 10 19h9v-2h-9l1.1-2h6.45c.75 0 1.41-.41 1.75-1.03L23 6H6.21l-.94-2z"/>
+            <circle cx="10.5" cy="20.5" r="1.5"/>
+            <circle cx="17.5" cy="20.5" r="1.5"/>
+        </svg>
+
+        COMPRAR AGORA
+    </a>
+</div>
+
 
 
 <script>
