@@ -130,14 +130,17 @@ body {
 
 .avaliacoes {
     display: flex;
+    width: 300%; /* 100% para cada uma das 3 avaliações */
     transition: transform 0.4s ease;
 }
 
 .avaliacao {
-    min-width: 100%;
+    width: 100%;
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
 }
+
 
 .card-avaliacao {
     width: 85%;
