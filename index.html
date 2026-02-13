@@ -1,1 +1,217 @@
-a
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gomas de Shilajit do Himalaia</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    user-select: none;
+}
+
+/* ===== BLOQUEIOS ===== */
+body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ===== IMAGEM TOPO ===== */
+.container-imagem {
+    position: relative;
+}
+
+.imagem-topo {
+    width: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.bloqueio {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+}
+
+/* ===== CARROSSEL ===== */
+.carrossel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+.carrossel {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+}
+
+/* ===== BOLINHAS ===== */
+.indicadores {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.bolinha {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 5px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background 0.3s;
+}
+
+.bolinha.ativa {
+    background: yellow;
+}
+</style>
+</head>
+
+<body oncontextmenu="return false;">
+
+<!-- ===== TOPO ===== -->
+<header class="container-imagem">
+    <img src="topo.jpg" alt="Topo Gomas de Shilajit" class="imagem-topo" draggable="false">
+    <div class="bloqueio"></div>
+</header>
+
+<!-- ===== CARROSSEL ===== -->
+<div class="carrossel-container">
+    <div class="carrossel" id="carrossel">
+
+        <div class="slide"><img src="img1.jpg" draggable="false"></div>
+        <div class="slide"><img src="img2.jpg" draggable="false"></div>
+        <div class="slide"><img src="img3.jpg" draggable="false"></div>
+        <div class="slide"><img src="img4.jpg" draggable="false"></div>
+        <div class="slide"><img src="img5.jpg" draggable="false"></div>
+        <div class="slide"><img src="img6.jpg" draggable="false"></div>
+        <div class="slide"><img src="img7.jpg" draggable="false"></div>
+        <div class="slide"><img src="img8.jpg" draggable="false"></div>
+        <div class="slide"><img src="img9.jpg" draggable="false"></div>
+        <div class="slide"><img src="img10.jpg" draggable="false"></div>
+        <div class="slide"><img src="img11.jpg" draggable="false"></div>
+
+    </div>
+</div>
+
+<div class="indicadores" id="indicadores"></div>
+
+<script>
+/* ===== BLOQUEAR DOWNLOAD E INSPECIONAR ===== */
+document.addEventListener("dragstart", e => e.preventDefault());
+
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && (e.key === "s" || e.key === "u")) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key === "I") e.preventDefault();
+});
+
+/* ===== CARROSSEL ===== */
+const carrossel = document.getElementById("carrossel");
+const slides = document.querySelectorAll(".slide");
+const indicadores = document.getElementById("indicadores");
+
+let index = 0;
+let startX = 0;
+let currentTranslate = 0;
+let isDragging = false;
+
+/* Criar bolinhas */
+slides.forEach((_, i) => {
+    const bolinha = document.createElement("span");
+    bolinha.classList.add("bolinha");
+    if (i === 0) bolinha.classList.add("ativa");
+    indicadores.appendChild(bolinha);
+});
+
+const bolinhas = document.querySelectorAll(".bolinha");
+
+function atualizarIndicador() {
+    bolinhas.forEach(b => b.classList.remove("ativa"));
+    bolinhas[index].classList.add("ativa");
+}
+
+function atualizarSlide() {
+    carrossel.style.transition = "transform 0.4s ease";
+    carrossel.style.transform = `translateX(-${index * 100}%)`;
+    atualizarIndicador();
+}
+
+/* Touch */
+carrossel.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    carrossel.style.transition = "none";
+    document.body.style.overflow = "hidden";
+});
+
+carrossel.addEventListener("touchmove", e => {
+    if (!isDragging) return;
+    const diff = e.touches[0].clientX - startX;
+    currentTranslate = -index * window.innerWidth + diff;
+    carrossel.style.transform = `translateX(${currentTranslate}px)`;
+});
+
+carrossel.addEventListener("touchend", () => {
+    isDragging = false;
+    document.body.style.overflow = "auto";
+
+    const movedBy = currentTranslate + index * window.innerWidth;
+
+    if (movedBy < -50 && index < slides.length - 1) index++;
+    if (movedBy > 50 && index > 0) index--;
+
+    atualizarSlide();
+});
+
+/* Mouse */
+carrossel.addEventListener("mousedown", e => {
+    startX = e.clientX;
+    isDragging = true;
+    carrossel.style.transition = "none";
+});
+
+carrossel.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+    const diff = e.clientX - startX;
+    currentTranslate = -index * window.innerWidth + diff;
+    carrossel.style.transform = `translateX(${currentTranslate}px)`;
+});
+
+carrossel.addEventListener("mouseup", () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    const movedBy = currentTranslate + index * window.innerWidth;
+
+    if (movedBy < -50 && index < slides.length - 1) index++;
+    if (movedBy > 50 && index > 0) index--;
+
+    atualizarSlide();
+});
+</script>
+
+</body>
+</html>
