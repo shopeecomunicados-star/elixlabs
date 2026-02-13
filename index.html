@@ -130,16 +130,16 @@ body {
 
 .avaliacoes {
     display: flex;
-    width: 300%; /* 100% para cada uma das 3 avaliações */
     transition: transform 0.4s ease;
 }
 
 .avaliacao {
-    width: 100%;
-    flex-shrink: 0;
+    min-width: 100%;
+    flex: 0 0 100%;
     display: flex;
     justify-content: center;
 }
+
 
 
 .card-avaliacao {
@@ -440,9 +440,11 @@ const slidesAvaliacao = document.querySelectorAll(".avaliacao");
 let indexAvaliacao = 0;
 
 function atualizarAvaliacao() {
+    const largura = document.querySelector(".avaliacoes-container").offsetWidth;
     avaliacoes.style.transition = "transform 0.4s ease";
-    avaliacoes.style.transform = `translateX(-${indexAvaliacao * 100}%)`;
+    avaliacoes.style.transform = `translateX(-${indexAvaliacao * largura}px)`;
 }
+
 
 function proximaAvaliacao() {
     if (indexAvaliacao < slidesAvaliacao.length - 1) {
