@@ -187,6 +187,53 @@ body {
     right: 10px;
 }
 
+
+/* ===== FAQ ===== */
+.faq-container {
+    width: 92%;
+    max-width: 700px;
+    margin: 40px auto 60px auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.faq-pergunta {
+    width: 100%;
+    background: white;
+    border: none;
+    padding: 18px 10px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-icon {
+    font-size: 24px;
+    color: #FFD700;
+    transition: transform 0.3s ease;
+}
+
+.faq-resposta {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.faq-resposta p {
+    padding: 0 10px 18px 10px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+}
+
+
     
 </style>
 </head>
@@ -308,6 +355,62 @@ body {
     <img src="site4.JPG" alt="Informações do Produto" class="imagem-topo" draggable="false">
     <div class="bloqueio"></div>
 </section>
+
+    <!-- ===== FAQ PERGUNTAS FREQUENTES ===== -->
+<section class="faq-container">
+
+    <div class="faq-item">
+        <button class="faq-pergunta">
+            Pergunta 1 aqui
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-resposta">
+            <p>Resposta da pergunta 1 aqui.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-pergunta">
+            Pergunta 2 aqui
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-resposta">
+            <p>Resposta da pergunta 2 aqui.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-pergunta">
+            Pergunta 3 aqui
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-resposta">
+            <p>Resposta da pergunta 3 aqui.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-pergunta">
+            Pergunta 4 aqui
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-resposta">
+            <p>Resposta da pergunta 4 aqui.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-pergunta">
+            Pergunta 5 aqui
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-resposta">
+            <p>Resposta da pergunta 5 aqui.</p>
+        </div>
+    </div>
+
+</section>
+
 
 
     
@@ -480,6 +583,25 @@ carrossel2.addEventListener("touchend", () => {
 });
 
 
+/* ===== FAQ FUNCIONAMENTO ===== */
+const perguntas = document.querySelectorAll(".faq-pergunta");
+
+perguntas.forEach(pergunta => {
+    pergunta.addEventListener("click", () => {
+        const resposta = pergunta.nextElementSibling;
+        const icon = pergunta.querySelector(".faq-icon");
+
+        if (resposta.style.maxHeight) {
+            resposta.style.maxHeight = null;
+            icon.textContent = "+";
+        } else {
+            resposta.style.maxHeight = resposta.scrollHeight + "px";
+            icon.textContent = "−";
+        }
+    });
+});
+
+    
     
 </script>
 
