@@ -432,25 +432,31 @@ carrossel.addEventListener("mouseup", () => {
 
 /* ===== CONTROLE CARROSSEL AVALIAÇÕES ===== */
 const avaliacoes = document.getElementById("avaliacoes");
-const totalAvaliacoes = 3;
+const slidesAvaliacao = document.querySelectorAll(".avaliacao");
+
 let indexAvaliacao = 0;
 
 function atualizarAvaliacao() {
+    avaliacoes.style.transition = "transform 0.4s ease";
     avaliacoes.style.transform = `translateX(-${indexAvaliacao * 100}%)`;
 }
 
 function proximaAvaliacao() {
-    if (indexAvaliacao < totalAvaliacoes - 1) {
+    if (indexAvaliacao < slidesAvaliacao.length - 1) {
         indexAvaliacao++;
-        atualizarAvaliacao();
+    } else {
+        indexAvaliacao = 0; // volta para primeira
     }
+    atualizarAvaliacao();
 }
 
 function voltarAvaliacao() {
     if (indexAvaliacao > 0) {
         indexAvaliacao--;
-        atualizarAvaliacao();
+    } else {
+        indexAvaliacao = slidesAvaliacao.length - 1; // vai para última
     }
+    atualizarAvaliacao();
 }
 
 
