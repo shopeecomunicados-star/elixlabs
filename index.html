@@ -299,6 +299,81 @@ button{
   font-weight:bold;
   margin-top:10px;
 }
+
+#quizOverlay{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+  font-family: Arial, sans-serif;
+}
+
+.quizBox{
+  background:#fff;
+  width:95%;
+  max-width:420px;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+
+.progressBar{
+  width:100%;
+  height:6px;
+  background:#eee;
+  border-radius:6px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+#progress{
+  height:100%;
+  width:0%;
+  background:#28a745;
+  transition:0.4s;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  background:#28a745;
+  color:#fff;
+  font-weight:bold;
+}
+
+.option{
+  background:#f5f5f5;
+  color:#333;
+  margin-top:8px;
+}
+
+.timer{
+  font-size:26px;
+  color:#d9534f;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* 🔥 ESTILO DAS IMAGENS */
+.quiz-img{
+  width:100%;
+  max-width:220px;
+  margin:15px auto;
+  display:block;
+  border-radius:8px;
+}
+
     
 </style>
 </head>
@@ -686,6 +761,7 @@ perguntas.forEach(pergunta => {
 });
 
  
+
 const steps = [
 
 `<h2>Descubra por que milhares de homens estão recuperando sua potência</h2>
@@ -693,6 +769,7 @@ const steps = [
 <button onclick="next()">Iniciar avaliação gratuita</button>`,
 
 `<h2>Prazer, somos a Elix Labs 🇧🇷</h2>
+<img src="logomarcaquizz.jpg" class="quiz-img">
 <p>Empresa brasileira especializada em saúde masculina.<br>
 Entrega discreta para todo o Brasil.</p>
 <button onclick="next()">Continuar</button>`,
@@ -718,22 +795,26 @@ Entrega discreta para todo o Brasil.</p>
 <p>Aguarde alguns segundos</p>`,
 
 `<h2>Seu perfil indica queda de energia e circulação</h2>
+<img src="homemquizz.jpg" class="quiz-img">
 <p>Fatores comuns que afetam o desempenho masculino.</p>
 <button onclick="next()">Continuar</button>`,
 
 `<h2>Recomendamos o Protocolo Elix Labs</h2>
+<img src="img2.jpg" class="quiz-img">
 <p>✔ Apoio hormonal natural<br>
 ✔ Mais energia<br>
 ✔ Melhor desempenho</p>
 <button onclick="next()">Continuar</button>`,
 
 `<h2>Compra 100% segura</h2>
+<img src="seloseguranca.jpg" class="quiz-img">
 <p>📦 Envio discreto<br>
 🇧🇷 Empresa brasileira<br>
 🛡 Garantia de 30 dias</p>
 <button onclick="next()">Continuar</button>`,
 
 `<h2>Mais de 18.000 clientes satisfeitos ⭐⭐⭐⭐⭐</h2>
+<img src="clientequizz.jpg" class="quiz-img">
 <button onclick="next()">Continuar</button>`,
 
 `<h2>⚠ Estoque promocional quase esgotado</h2>
@@ -781,6 +862,7 @@ function startTimer(){
 }
 
 showStep();
+
    
     
 </script>
