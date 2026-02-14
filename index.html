@@ -235,7 +235,70 @@ body {
     color: #444;
 }
 
+#quizOverlay{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+  font-family: Arial, sans-serif;
+}
 
+.quizBox{
+  background:#fff;
+  width:95%;
+  max-width:420px;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+
+.progressBar{
+  width:100%;
+  height:6px;
+  background:#eee;
+  border-radius:6px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+#progress{
+  height:100%;
+  width:0%;
+  background:#28a745;
+  transition:0.4s;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  background:#28a745;
+  color:#fff;
+  font-weight:bold;
+}
+
+.option{
+  background:#f5f5f5;
+  color:#333;
+  margin-top:8px;
+}
+
+.timer{
+  font-size:26px;
+  color:#d9534f;
+  font-weight:bold;
+  margin-top:10px;
+}
     
 </style>
 </head>
@@ -419,6 +482,19 @@ body {
     <div class="bloqueio"></div>
 </section>
 
+
+    <!-- QUIZ OVERLAY ELIX LABS -->
+<div id="quizOverlay">
+  <div class="quizBox">
+
+    <div class="progressBar">
+      <div id="progress"></div>
+    </div>
+
+    <div id="quizContent"></div>
+
+  </div>
+</div>
 
 
     
@@ -609,7 +685,103 @@ perguntas.forEach(pergunta => {
     });
 });
 
-    
+ 
+const steps = [
+
+`<h2>Descubra por que milhares de homens estão recuperando sua potência</h2>
+<p>Avaliação gratuita e confidencial</p>
+<button onclick="next()">Iniciar avaliação gratuita</button>`,
+
+`<h2>Prazer, somos a Elix Labs 🇧🇷</h2>
+<p>Empresa brasileira especializada em saúde masculina.<br>
+Entrega discreta para todo o Brasil.</p>
+<button onclick="next()">Continuar</button>`,
+
+`<h2>Qual problema mais afeta você?</h2>
+<button class="option" onclick="next()">Dificuldade de ereção</button>
+<button class="option" onclick="next()">Baixo desejo sexual</button>
+<button class="option" onclick="next()">Falha na hora H</button>
+<button class="option" onclick="next()">Melhorar desempenho</button>`,
+
+`<h2>Como isso afeta sua confiança?</h2>
+<button class="option" onclick="next()">Evito intimidade</button>
+<button class="option" onclick="next()">Me sinto inseguro</button>
+<button class="option" onclick="next()">Afeta relacionamento</button>
+<button class="option" onclick="next()">Prefiro não comentar</button>`,
+
+`<h2>Há quanto tempo percebe isso?</h2>
+<button class="option" onclick="next()">Recentemente</button>
+<button class="option" onclick="next()">Alguns meses</button>
+<button class="option" onclick="next()">Mais de 1 ano</button>`,
+
+`<h2>🔍 Analisando suas respostas...</h2>
+<p>Aguarde alguns segundos</p>`,
+
+`<h2>Seu perfil indica queda de energia e circulação</h2>
+<p>Fatores comuns que afetam o desempenho masculino.</p>
+<button onclick="next()">Continuar</button>`,
+
+`<h2>Recomendamos o Protocolo Elix Labs</h2>
+<p>✔ Apoio hormonal natural<br>
+✔ Mais energia<br>
+✔ Melhor desempenho</p>
+<button onclick="next()">Continuar</button>`,
+
+`<h2>Compra 100% segura</h2>
+<p>📦 Envio discreto<br>
+🇧🇷 Empresa brasileira<br>
+🛡 Garantia de 30 dias</p>
+<button onclick="next()">Continuar</button>`,
+
+`<h2>Mais de 18.000 clientes satisfeitos ⭐⭐⭐⭐⭐</h2>
+<button onclick="next()">Continuar</button>`,
+
+`<h2>⚠ Estoque promocional quase esgotado</h2>
+<p>Oferta válida por:</p>
+<div class="timer" id="timer">10:00</div>
+<button onclick="finish()">VER MINHA RECOMENDAÇÃO</button>`
+];
+
+let current = 0;
+
+function showStep(){
+  document.getElementById("quizContent").innerHTML = steps[current];
+  document.getElementById("progress").style.width =
+    ((current)/(steps.length-1))*100 + "%";
+
+  if(current === 5){
+    setTimeout(next, 2500);
+  }
+
+  if(current === 10){
+    startTimer();
+  }
+}
+
+function next(){
+  current++;
+  if(current < steps.length) showStep();
+}
+
+function finish(){
+  document.getElementById("quizOverlay").style.display="none";
+}
+
+function startTimer(){
+  let time = 600;
+  const t = document.getElementById("timer");
+
+  const interval = setInterval(()=>{
+    let m = Math.floor(time/60);
+    let s = time%60;
+    t.innerHTML = `${m}:${s<10?'0':''}${s}`;
+    time--;
+    if(time<0) clearInterval(interval);
+  },1000);
+}
+
+showStep();
+   
     
 </script>
 
