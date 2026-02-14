@@ -374,6 +374,67 @@ button{
   border-radius:8px;
 }
 
+.avaliacoes {
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.lista-avaliacoes {
+  text-align: left;
+}
+
+.avaliacao {
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.perfil {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.print {
+  margin-top: 8px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.extra {
+  display: none;
+}
+
+/* BOTÕES */
+
+#verMais, #verMenos {
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+}
+
+#verMenos {
+  display: none;
+}
+
+#verMais:hover, #verMenos:hover {
+  background: #0b5ed7;
+}
+
     
 </style>
 </head>
@@ -431,6 +492,127 @@ button{
         COMPRAR AGORA
     </a>
 </div>
+
+    <section class="avaliacoes" id="avaliacoes">
+
+  <h2>⭐ Avaliações de Clientes</h2>
+
+  <div class="lista-avaliacoes">
+
+    <!-- 1 -->
+    <div class="avaliacao">
+      <img src="perfil1.jpg" class="perfil">
+      <div>
+        <strong>Rafael M.</strong>
+        <p>Comprei meio desconfiado, mas funcionou mesmo. Já na primeira semana senti diferença real.</p>
+      </div>
+    </div>
+
+    <!-- 2 (print1) -->
+    <div class="avaliacao">
+      <img src="perfil2.jpg" class="perfil">
+      <div>
+        <strong>Diego S.</strong>
+        <p>Mano, isso aqui é outro nível. Energia lá em cima e confiança voltou total.</p>
+        <img src="print1.jpg" class="print">
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="avaliacao">
+      <img src="perfil3.jpg" class="perfil">
+      <div>
+        <strong>Bruno A.</strong>
+        <p>Já testei vários produtos e nenhum chegou perto desse. Vale cada centavo.</p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="avaliacao">
+      <img src="perfil4.jpg" class="perfil">
+      <div>
+        <strong>Leandro P.</strong>
+        <p>Tenho 42 anos e achei que era coisa da idade… mas mudou completamente.</p>
+        <img src="print2.jpg" class="print">
+      </div>
+    </div>
+
+    <!-- ===== EXTRAS ===== -->
+
+    <div class="avaliacao extra">
+      <img src="perfil5.jpg" class="perfil">
+      <div>
+        <strong>Marcelo T.</strong>
+        <p>Produto forte mesmo. Resultado rápido e sem efeito estranho.</p>
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil6.jpg" class="perfil">
+      <div>
+        <strong>André C.</strong>
+        <p>Não costumo avaliar nada, mas esse merece. Mudou minha autoestima.</p>
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil7.jpg" class="perfil">
+      <div>
+        <strong>Rodrigo F.</strong>
+        <p>Minha esposa até perguntou o que eu tava tomando 😂 recomendo demais.</p>
+        <img src="print3.jpg" class="print">
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil8.jpg" class="perfil">
+      <div>
+        <strong>Gustavo L.</strong>
+        <p>Usei por uns 10 dias e a diferença é absurda. Não fico mais sem.</p>
+        <img src="print4.jpg" class="print">
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil9.jpg" class="perfil">
+      <div>
+        <strong>Felipe R.</strong>
+        <p>Chegou rápido, embalagem discreta e funciona mesmo.</p>
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil10.jpg" class="perfil">
+      <div>
+        <strong>Daniel V.</strong>
+        <p>Sério, não é propaganda enganosa. Resultado real.</p>
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil11.jpg" class="perfil">
+      <div>
+        <strong>Eduardo N.</strong>
+        <p>Melhor investimento que fiz nos últimos tempos.</p>
+        <img src="print5.jpg" class="print">
+      </div>
+    </div>
+
+    <div class="avaliacao extra">
+      <img src="perfil12.jpg" class="perfil">
+      <div>
+        <strong>Caio B.</strong>
+        <p>Simplesmente funciona. Sem enrolação.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTÕES -->
+  <button id="verMais">Ver mais ↓</button>
+  <button id="verMenos">Ver menos ↑</button>
+
+</section>
 
     <!-- ===== IMAGEM FORMAS DE PAGAMENTO ===== -->
 <section class="container-imagem">
@@ -863,7 +1045,24 @@ function startTimer(){
 
 showStep();
 
-   
+ const verMais = document.getElementById("verMais");
+const verMenos = document.getElementById("verMenos");
+const extras = document.querySelectorAll(".extra");
+const secao = document.getElementById("avaliacoes");
+
+verMais.onclick = function () {
+  extras.forEach(el => el.style.display = "flex");
+  verMais.style.display = "none";
+  verMenos.style.display = "block";
+};
+
+verMenos.onclick = function () {
+  extras.forEach(el => el.style.display = "none");
+  verMenos.style.display = "none";
+  verMais.style.display = "block";
+
+  secao.scrollIntoView({ behavior: "smooth" });
+};  
     
 </script>
 
